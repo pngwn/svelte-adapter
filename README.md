@@ -73,7 +73,7 @@ Svelte components can emit events which doesn't quite make sense in React. Any e
 
 Normal props behave as you would expect.
 
-```js
+```jsx
 import React, { useState } from "react";
 import toReact from "svelte-adapter/react";
 
