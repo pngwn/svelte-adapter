@@ -1,0 +1,32 @@
+{
+  "name": "svelte-adapter",
+  "description": "Use Svelte components with Vue and React.",
+  "author": "pngwn <hello@pngwn.io>",
+  "license": "MIT",
+  "scripts": {
+    "test:build": "pwa export",
+    "test:start": "sirv build -s",
+    "test:watch": "pwa watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@pwa/cli": "latest",
+    "@pwa/preset-react": "latest",
+    "@pwa/preset-vue": "^0.4.1",
+    "ganalytics": "^3.0.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "rollup": "^1.16.2",
+    "sirv-cli": "^0.2.0",
+    "svelte": "^3.5.3",
+    "svelte-loader": "^2.13.4",
+    "vue": "^2.6.10"
+  },
+  "browserslist": [
+    ">0.25%",
+    "last 1 version",
+    "not ie_mob 11",
+    "not ie 11",
+    "not dead"
+  ]
+}
