@@ -7,7 +7,7 @@
     <Cropper
       v-if="show"
       @cropcomplete="updateData"
-      :watch:zoom="updateZoom"
+      @watch:zoom="updateZoom"
       :image="image"
       :zoom="zoom"
     />
@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     updateData({ detail }) {
-      console.log("hi");
       this.data = detail;
     },
     updateZoom(zoomLevel) {
@@ -55,9 +54,6 @@ export default {
     },
     decreaseZoom() {
       this.zoom = this.zoom <= 1 ? 1 : this.zoom - 1;
-    },
-    log(val) {
-      console.log(val);
     }
   }
 };

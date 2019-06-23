@@ -20,19 +20,18 @@ export default (Component, style = {}, tag = "span") =>
         props: this.$attrs
       });
 
+      let watchers = [];
+
       for (const key in this.$listeners) {
         this.comp.$on(key, this.$listeners[key]);
-      }
-      let watchers = [];
-      for (const key in this.$attrs) {
         const watchRe = /watch:([^]+)/;
 
         const watchMatch = key.match(watchRe);
 
-        if (watchMatch && typeof this.$attrs[key] === "function") {
+        if (watchMatch && typeof this.$listeners[key] === "function") {
           watchers.push([
             `${watchMatch[1][0].toLowerCase()}${watchMatch[1].slice(1)}`,
-            this.$attrs[key]
+            this.$listeners[key]
           ]);
         }
       }
