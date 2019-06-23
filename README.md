@@ -1,20 +1,29 @@
 # svelte-adapter
 
-A simple utility that allows you to use [Svelte]() components inside [Vue]() or [React]() components.
+A simple utility that allows you to use [Svelte](https://svelte.dev/) components inside [React](https://reactjs.org/) or [Vue](https://vuejs.org/) components.
 
 There is an adapter each for Vue and React which allows you to pass props and respond to events in a way that makes sense for that library.
 
 This isn't a perfect solution, there are some limitations.
 
+---
+
+- [Install](#install)
+- [Use it](#use-it)
+- [Examples](#examples)
+  - [React](#react)
+  - [Vue](#vue)
+- [Limitations](#limtations)
+
 # Install
 
-With [npm]():
+With [npm](https://www.npmjs.com/):
 
 ```bash
 npm install svelte-adapter
 ```
 
-Or with [yarn]():
+Or with [yarn](https://yarnpkg.com/lang/en/):
 
 ```bash
 yarn add svelte-adapter
@@ -54,9 +63,9 @@ In the examples below the Svelte component we will be using is a simple componen
 
 ### React
 
-The React-Svelte adapter is a named import: `toReact`.
+The React-Svelte adapter is the default export from `svelte-adpater/react`.
 
-The implementation of the React adapter uses [hooks]() so you will need a recent version of React for this to work. If necessary I could add a class-based version at some stage.
+The implementation of the React adapter uses [hooks](https://reactjs.org/docs/hooks-intro.html) so you will need a recent version of React for this to work. If necessary I could add a class-based version at some stage.
 
 Using the adaptor is very straight-forward, the adapter is a Higher Order Component that takes a Svelte component and returns a React component. The below example assumes your are compiling Svelte components as they are imported using webpack or rollup. If not, just import the compiled javascript file instead.
 
@@ -66,7 +75,7 @@ Normal props behave as you would expect.
 
 ```js
 import React, { useState } from "react";
-import { toReact } from "svelte-adapter";
+import toReact from "svelte-adapter/react";
 
 import SvelteComponent from "../App.svelte";
 
@@ -92,7 +101,7 @@ const App = () => {
 
 ### Vue
 
-The Vue-Svelte adapter is a named import: `toVue`.
+The Vue-Svelte adapter is the default export from `svelte-adpater/vue`.
 
 Using the adapter is very straight-forward, the adapter is a Higher Order Component that takes a Svelte component and returns a Vue component. The below example assumes your are compiling Svelte components as they are imported using webpack or rollup. If not, just import the compiled javascript file instead.
 
@@ -110,7 +119,7 @@ Normal props behave as expected.
 
 <script>
 import SvelteApp from "../App.svelte";
-import { toVue } from "svelte-adapter";
+import toVue from "svelte-adapter/vue";
 
 const baseStyle = {
   width: "50%"
@@ -133,3 +142,17 @@ export default {
 };
 </script>
 ```
+
+## Limitations
+
+While these adapters works fine in many situations, it is not currently possible to pass children or slots to Svelte compoennts with the adapters.
+
+This won't work with any of the adpaters:
+
+```html
+<SvelteComponent>
+  <p>Hello</p>
+</SvelteComponent>
+```
+
+There may be more limitations that I am unaware of, this package is really just intended a simple way to use Svelte and should work most of the time. The code is pretty short and very simple, if you have specific needs you will probably be better off writing something custom fpr your application.
