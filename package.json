@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Use Svelte components with Vue and React.",
   "author": "pngwn <hello@pngwn.io>",
+  "repository": "https://github.com/pngwn/svelte-adapter",
   "license": "MIT",
   "scripts": {
     "test:build": "pwa export",
