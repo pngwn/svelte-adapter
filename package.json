@@ -1,6 +1,6 @@
 {
   "name": "svelte-adapter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Use Svelte components with Vue and React.",
   "author": "pngwn <hello@pngwn.io>",
   "repository": "https://github.com/pngwn/svelte-adapter",
