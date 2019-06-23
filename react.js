@@ -7,18 +7,38 @@ export default (Component, style = {}, tag = "span") => props => {
 
   useEffect(() => {
     const eventRe = /on([A-Z]{1,}[a-zA-Z]*)/;
+    const watchRe = /watch([A-Z]{1,}[a-zA-Z]*)/;
 
     component.current = new Component({ target: container.current, props });
 
+    let watchers = [];
     for (const key in props) {
-      const match = key.match(eventRe);
+      const eventMatch = key.match(eventRe);
+      const watchMatch = key.match(watchRe);
 
-      if (match && typeof props[key] === "function") {
+      if (eventMatch && typeof props[key] === "function") {
         component.current.$on(
-          `${match[1][0].toLowerCase()}${match[1].slice(1)}`,
+          `${eventMatch[1][0].toLowerCase()}${eventMatch[1].slice(1)}`,
           props[key]
         );
       }
+
+      if (watchMatch && typeof props[key] === "function") {
+        watchers.push([
+          `${watchMatch[1][0].toLowerCase()}${watchMatch[1].slice(1)}`,
+          props[key]
+        ]);
+      }
+    }
+
+    if (watchers.length) {
+      const update = component.current.$$.update;
+      component.current.$$.update = function() {
+        watchers.forEach(([name, callback]) => {
+          callback(component.current.$$.ctx[name]);
+        });
+        update.apply(null, arguments);
+      };
     }
 
     return () => {

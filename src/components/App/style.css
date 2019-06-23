@@ -1,0 +1,23 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+button {
+  background: cadetblue;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  margin: 0px 10px;
+}
+
+.data {
+  text-align: left;
+  position: absolute;
+  background: #eee;
+  width: 300px;
+  height: 300px;
+  z-index: 2;
+}

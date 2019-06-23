@@ -19,5 +19,7 @@
 <div>
   <h1>I am a Svelte component</h1>
   <h2>{number}</h2>
-  <button on:click>Click to fire an event</button>
+  <button on:click={() => dispatch('click', 'Boing')}>
+    Click to fire an event
+  </button>
 </div>
