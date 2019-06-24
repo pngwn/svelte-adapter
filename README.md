@@ -168,7 +168,7 @@ export default {
 
 ## Limitations
 
-While everything shouldwork in most situations, it is not currently possible to pass children or slots to Svelte components with these adapters.
+While everything should work in most situations, it is not currently possible to pass children or slots to Svelte components with these adapters.
 
 This won't work with any of the adpaters:
 
