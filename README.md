@@ -89,7 +89,7 @@ const baseStyle = {
   width: "50%"
 };
 
-const SvelteInReact = toReact(SvelteComponent, baseStyle, "div");
+const SvelteInReact = toReact(SvelteApp, baseStyle, "div");
 
 const App = () => {
   const [count, setCount] = useState(10);
