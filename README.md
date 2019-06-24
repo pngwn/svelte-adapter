@@ -83,7 +83,7 @@ Normal props behave as you would expect.
 import React, { useState } from "react";
 import toReact from "svelte-adapter/react";
 
-import SvelteComponent from "../App.svelte";
+import SvelteApp from "../App.svelte";
 
 const baseStyle = {
   width: "50%"
