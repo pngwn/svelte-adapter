@@ -63,6 +63,8 @@ In the examples below the Svelte component we will be using is a simple componen
 
 ### React
 
+[Try it on codesandbox](https://codesandbox.io/s/svelte-adapterreact-8s33k)
+
 The React-Svelte adapter is the default export from `svelte-adpater/react`.
 
 The implementation of the React adapter uses [hooks](https://reactjs.org/docs/hooks-intro.html) so you will need a recent version of React for this to work. If necessary I could add a class-based version at some stage.
@@ -70,6 +72,10 @@ The implementation of the React adapter uses [hooks](https://reactjs.org/docs/ho
 Using the adaptor is very straight-forward, the adapter is a Higher Order Component that takes a Svelte component and returns a React component. The below example assumes your are compiling Svelte components as they are imported using webpack or rollup. If not, just import the compiled javascript file instead.
 
 Svelte components can emit events which doesn't quite make sense in React. Any events emitted by the svelte component can be passed callbacks via an `on*` prop containing a function, this function will fire when the event is emitted. Any prop that starts with `on` followed by a capital letter is assumed to be an event and will be used to add a listener. `onClick` will fire the provided callback when `'click'` events are emitted, `onSomethingRandom` will do the same for `'somethingRandom'` events. This does not interfere with props that have the same naming convention, they will all be passed regardless.
+
+Some Svelte component's allow you to `bind` to internal data which doesn't make too much sense outside of Svelte yet they often form an important part of the API. Instead I have added the option to use a `watch*` prop (similar to the `on*` prop). This also takes a callback function and recieves the value you wish to watch as its only argument. `watchNumber={ n => setCount(n) }` would watch the internal value `number`, when `number` changes the callback you passed to it would be executed receiving the new `number` value as its only argument.
+
+This may seem strange but many Svelte components are written to make use of this `bind` syntax, without it there is often a hole in the API leaving you unable to respond to internal state changes. You will probably want to control your state with React, this `watch*` prop is an escape hatch that allows you to pull out those internal values to use however you wish.
 
 Normal props behave as you would expect.
 
@@ -92,7 +98,11 @@ const App = () => {
 
   return (
     <div>
-      <SvelteInReact number={count} onMagicalclick={handleClick} />
+      <SvelteInReact
+        number={count}
+        onMagicalclick={handleClick}
+        watchNumber={n => setCount(n)}
+      />
       <button onClick={handleClick}>Increment - {count}</button>
     </div>
   );
@@ -101,18 +111,28 @@ const App = () => {
 
 ### Vue
 
+[Try it on codesandbox](https://codesandbox.io/s/svelte-adaptervue-40uwg)
+
 The Vue-Svelte adapter is the default export from `svelte-adpater/vue`.
 
 Using the adapter is very straight-forward, the adapter is a Higher Order Component that takes a Svelte component and returns a Vue component. The below example assumes your are compiling Svelte components as they are imported using webpack or rollup. If not, just import the compiled javascript file instead.
 
 Since Vue has an event mechanism similar to Svelte, event directives can be used as expected. `v-on:*` or `@*` directives will listen for the matching events on the Svelte component. `v-on:click` or `@click` will fire the provided callback when `'click'` events are emitted, `v-on:somethingRandom` or `@somethingrandom` will do the same for `'somethingRandom'` events. Other props behave as you would expect.
 
+Some Svelte component's allow you to `bind` to internal data which doesn't make too much sense outside of Svelte yet they often form an important part of the API. I have added the option to use a `@watch:*` prop (similar to the `@:*` prop). This also takes a callback function and recieves the value you wish to watch as its only argument. `@watch:number="setCount"` would watch the internal value `number`, when `number` changes the callback you passed to it would be executed receiving the new `number` value as its only argument.
+
+This may seem strange but many Svelte components are written to make use of this `bind` syntax, without it there is often a hole in the API leaving you unable to respond to internal state changes. You will probably want to control your state in a Vue component, this `@watch:*` prop is an escape hatch that allows you to pull out those internal values to use however you wish.
+
 Normal props behave as expected.
 
 ```vue
 <template>
   <div>
-    <SvelteInVue :number="count" @magicalclick="handleClick" />
+    <SvelteInVue
+      :number="count"
+      @magicalclick="handleClick"
+      @watch:number="setCount"
+    />
     <button @click="handleClick">Increment - {{ count }}</button>
   </div>
 </template>
@@ -137,6 +157,9 @@ export default {
   methods: {
     handleClick() {
       this.count += 1;
+    },
+    setCount(n) {
+      this.count = n;
     }
   }
 };
@@ -145,7 +168,7 @@ export default {
 
 ## Limitations
 
-While these adapters works fine in many situations, it is not currently possible to pass children or slots to Svelte compoennts with the adapters.
+While everything shouldwork in most situations, it is not currently possible to pass children or slots to Svelte components with these adapters.
 
 This won't work with any of the adpaters:
 
@@ -155,4 +178,4 @@ This won't work with any of the adpaters:
 </SvelteComponent>
 ```
 
-There may be more limitations that I am unaware of, this package is really just intended a simple way to use Svelte and should work most of the time. The code is pretty short and very simple, if you have specific needs you will probably be better off writing something custom fpr your application.
+There may be more limitations that I am unaware of, this package is really just intended a simple way to use Svelte and should work most of the time. The code is short and simple, if you have specific needs you will probably be better off writing something custom for your application.
