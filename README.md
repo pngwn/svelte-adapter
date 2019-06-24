@@ -36,14 +36,14 @@ Each 'adapter' is a simple function that tales a svelte component and a few opti
 The adapters both have the same signature:
 
 ```ts
-adapter(Component: SvelteComponent, styleObject?: object, wrapperElement?: string) : Component`
+adapter(Component: SvelteComponent, styleObject?: object, wrapperElement?: string) : Component
 ```
 
 - `Component` should be a _compiled_ svelte component, either precompiled or compiled as part of your build step using `rollup-plugin-svelte` for rollup or `svelte-loader` from webpack.
 - `styleObject` (optional) should be an object of styles that will be applied to the base elemement. This should be a valid JavaScript object with camelCased css property names. This defaults to an empty object.
 - `wrapperElement` (optional). All component have a base 'wrapper' element, by default this is a `<span>` but you can pass in a string to customise this behaviour (eg: `'div'`, `'li'`, etc.) If need a specific wrapper element but don't care about styles, you can simply pass an empty object as the `styleObject`.
 
-In the examples below the Svelte component we will be using is a simple component that accepts a prop that will be rendered and emits an event upon clicking a button.
+In the examples below, the Svelte component we will be using is a simple component that accepts a prop that will be rendered and emits an event upon clicking a button.
 
 ```svelte
 <script>
