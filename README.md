@@ -89,7 +89,7 @@ const baseStyle = {
   width: "50%"
 };
 
-const SvelteInReact = reactSvelte(SvelteApp, baseStyle, "div");
+const SvelteInReact = toReact(SvelteComponent, baseStyle, "div");
 
 const App = () => {
   const [count, setCount] = useState(10);
@@ -147,7 +147,7 @@ const baseStyle = {
 
 export default {
   components: {
-    SvelteInVue: vueAdaptor(SvelteApp, baseStyle, "div")
+    SvelteInVue: toVue(SvelteApp, baseStyle, "div")
   },
   data() {
     return {
