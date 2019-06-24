@@ -13,7 +13,7 @@ This isn't a perfect solution, there are some limitations.
 - [Examples](#examples)
   - [React](#react)
   - [Vue](#vue)
-- [Limitations](#limtations)
+- [Limitations](#limitations)
 
 # Install
 
