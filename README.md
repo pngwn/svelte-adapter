@@ -31,7 +31,7 @@ yarn add svelte-adapter
 
 # Use it
 
-Each 'adapter' is a simple function that tales a svelte component and a few options and returns a Vue or React component that can be used in Vue templates or JSX as you would expect. The returned components will always have a wrapper element, by default this is a `<span>` but it can be customised.
+Each 'adapter' is a simple function that takes a svelte component and a few options and returns a Vue or React component that can be used in Vue templates or JSX as you would expect. The returned components will always have a wrapper element, by default this is a `<span>` but it can be customised.
 
 The adapters both have the same signature:
 
