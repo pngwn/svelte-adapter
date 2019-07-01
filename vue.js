@@ -49,5 +49,8 @@ export default (Component, style = {}, tag = "span") =>
     },
     updated() {
       this.comp.$set(this.$attrs);
+    },
+    destroyed() {
+      this.comp.$destroy();
     }
   });
