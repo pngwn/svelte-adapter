@@ -35,7 +35,8 @@ export default (Component, style = {}, tag = "span") => props => {
       const update = component.current.$$.update;
       component.current.$$.update = function() {
         watchers.forEach(([name, callback]) => {
-          callback(component.current.$$.ctx[name]);
+          const index = component.current.$$.props[name];
+          callback(component.current.$$.ctx[index]);
         });
         update.apply(null, arguments);
       };
