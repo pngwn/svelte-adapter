@@ -20,7 +20,7 @@
     "react-dom": "^16.5.0",
     "rollup": "^1.16.2",
     "sirv-cli": "^0.2.0",
-    "svelte": "^3.5.3",
+    "svelte": "^3.20.1",
     "svelte-easy-crop": "^1.0.3",
     "svelte-loader": "^2.13.4",
     "vue": "^2.6.10"
