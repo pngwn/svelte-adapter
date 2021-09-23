@@ -10,7 +10,6 @@
     "test:start": "sirv build -s",
     "test:watch": "pwa watch"
   },
-  "dependencies": {},
   "devDependencies": {
     "@pwa/cli": "latest",
     "@pwa/preset-react": "latest",
