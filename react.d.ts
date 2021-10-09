@@ -5,6 +5,6 @@ type ExtractProps<Ctor> = Ctor extends new (arg: any) => SvelteComponentTyped<in
 
 export default function <CompCtor extends new (arg: any) => SvelteComponent>(
 	component: CompCtor,
-	styles: Record<string, string>,
-	element: string
+	styles?: Record<string, string>,
+	element?: string
 ): FC<ExtractProps<CompCtor>>
